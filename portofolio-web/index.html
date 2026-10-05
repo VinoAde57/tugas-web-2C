@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio - Vino Ade Chrisnanta</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        darkbg: '#0a0b0e',
+                        cardbg: '#12141a',
+                        cardborder: '#222630',
+                        accentpurple: '#8b5cf6',
+                        accentpink: '#ec4899',
+                        accentcyan: '#06b6d4',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Ambient Glow Background Effects */
+        .glow-purple {
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            top: -50px;
+            left: -100px;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .glow-pink {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+            top: 200px;
+            right: -150px;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .glow-cyan {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+            bottom: 100px;
+            left: 20%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Glassmorphism Navigation & Cards */
+        .glass-nav {
+            background: rgba(10, 11, 14, 0.75);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Custom Hover & Card Transitions */
+        .hover-card-glow {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hover-card-glow:hover {
+            border-color: rgba(139, 92, 246, 0.4);
+            box-shadow: 0 0 25px -5px rgba(139, 92, 246, 0.25);
+            transform: translateY(-4px);
+        }
+
+        /* Polaroid Photo Effect in About Section */
+        .polaroid-frame {
+            transform: rotate(-3deg);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .polaroid-frame:hover {
+            transform: rotate(0deg) scale(1.02);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0b0e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #222630;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8b5cf6;
+        }
+    </style>
+</head>
+<body class="bg-darkbg text-gray-200 font-sans antialiased relative overflow-x-hidden selection:bg-purple-500 selection:text-white">
+
+    <!-- Ambient Background Lighting -->
+    <div class="glow-purple"></div>
+    <div class="glow-pink"></div>
+
+    <!-- 1. NAVIGATION BAR -->
+    <nav class="fixed top-0 left-0 w-full z-50 glass-nav py-4 px-6 md:px-12 transition-all">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- Brand Logo -->
+            <a href="#" class="text-2xl font-extrabold tracking-tight text-white flex items-center gap-1">
+                Vino<span class="text-accentpurple">.</span>
+            </a>
+
+            <!-- Navigation Links -->
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="#beranda" class="hover:text-white transition-colors cursor-pointer" data-id="Beranda" data-en="Home">Beranda</a>
+                <a href="#tentang" class="hover:text-white transition-colors cursor-pointer" data-id="Tentang" data-en="About">Tentang</a>
+                <a href="#sertifikat" class="hover:text-white transition-colors cursor-pointer" data-id="sertifikat" data-en="Certifications">Sertifikat</a>
+                <a href="#project" class="hover:text-white transition-colors cursor-pointer" data-id="Project" data-en="Projects">Project</a>
+                <a href="#kontak" class="hover:text-white transition-colors cursor-pointer" data-id="Kontak" data-en="Contact">Kontak</a>
+            </div>
+
+            <!-- Right Controls: Language Switcher -->
+            <div class="flex items-center gap-3">
+                <button id="langToggle" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cardbg border border-cardborder text-xs font-semibold text-gray-300 hover:text-white hover:border-purple-500/50 transition">
+                    <i class="fa-solid fa-globe text-accentpurple"></i>
+                    <span id="currentLang">ID</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. HERO SECTION -->
+    <section id="beranda" class="min-h-screen pt-32 pb-20 px-6 md:px-12 max-w-7xl mx-auto flex items-center relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
+            
+            <!-- Hero Left Text Content -->
+            <div class="lg:col-span-7 space-y-6">
+                <div class="inline-block px-3 py-1 rounded-md bg-purple-500/10 border border-purple-500/20 text-accentpurple text-xs font-bold tracking-widest uppercase">
+                    HALO, SAYA
+                </div>
+
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight leading-tight">
+                    Vino Ade <br>
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-200 to-purple-400">
+                        Chrisnanta
+                    </span>
+                </h1>
+
+                <div class="text-xl md:text-2xl text-gray-300 font-medium flex items-center gap-2">
+                    <span data-id="Seorang" data-en="A">Seorang</span>
+                    <span class="text-white font-semibold border-b-2 border-accentpurple">
+                        Mahasiswa Sistem Informasi
+                    </span>
+                </div>
+
+                <!-- Social Icons Bar -->
+                <div class="flex items-center gap-4 py-2 text-gray-400">
+                    <a href="https://github.com/VinoAde57" target="_blank" class="w-10 h-10 rounded-lg bg-cardbg border border-cardborder flex items-center justify-center hover:text-white hover:border-purple-500 hover:bg-purple-500/10 transition"><i class="fa-brands fa-github text-lg"></i></a>
+                    <a href="https://www.instagram.com/vinoo_ac" target="_blank" class="w-10 h-10 rounded-lg bg-cardbg border border-cardborder flex items-center justify-center hover:text-white hover:border-purple-500 hover:bg-purple-500/10 transition"><i class="fa-brands fa-instagram text-lg"></i></a>
+                </div>
+
+                <p class="text-gray-400 text-base max-w-xl leading-relaxed" data-id="Saya membantu bisnis dan organisasi mengembangkan strategi sistem informasi, pemrograman logika Python, dan optimasi bisnis digital yang berdaya saing tinggi." data-en="I help businesses and organizations develop information system strategies, Python logical programming, and highly competitive digital business optimizations.">
+                    Saya membantu bisnis dan organisasi mengembangkan strategi sistem informasi, pemrograman logika Python, dan optimasi bisnis digital yang berdaya saing tinggi.
+                </p>
+
+                <!-- Action CTA Buttons -->
+                <div class="flex flex-wrap items-center gap-4 pt-4">
+                    <a href="#proyek" class="px-6 py-3.5 rounded-full bg-white text-black font-bold text-sm hover:bg-gray-200 transition flex items-center gap-2 group">
+                        <span data-id="Lihat Proyek" data-en="View Projects">Lihat Proyek</span>
+                        <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <a href="#kontak" class="px-6 py-3.5 rounded-full bg-cardbg border border-cardborder text-white font-medium text-sm hover:border-purple-500 hover:bg-purple-500/10 transition" data-id="Kontak Saya" data-en="Contact Me">
+                        Kontak Saya
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hero Right Card Profile Showcase -->
+            <div class="lg:col-span-5 flex justify-center">
+                <div class="relative w-full max-w-sm bg-cardbg border border-cardborder rounded-3xl p-4 hover-card-glow shadow-2xl">
+                    <!-- Image Box -->
+                    <div class="relative w-full h-80 rounded-2xl overflow-hidden bg-zinc-900">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80" alt="Vino Ade Chrisnanta" class="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition duration-500">
+                        
+                        <!-- Top Tag Overlay -->
+                        <div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 text-xs font-semibold text-white">
+                            Vino Ade Chrisnanta <span class="text-accentpurple">• Tech Analyst</span>
+                        </div>
+                    </div>
+
+                    <!-- Profile Card Footer Badge -->
+                    <div class="mt-4 p-3 bg-zinc-900/80 rounded-xl border border-white/5 flex items-center justify-between">
+                        <div class="flex items-center gap-2.5">
+                            <div class="relative w-3 h-3">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                            </div>
+                            <span class="text-xs font-medium text-gray-300">@vinoadechrisnanta</span>
+                        </div>
+                        <a href="#kontak" class="text-xs font-bold text-accentpurple hover:underline" data-id="Hubungi" data-en="Contact">Hubungi</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 3. ABOUT SECTION -->
+    <section id="tentang" class="py-24 px-6 md:px-12 max-w-7xl mx-auto relative z-10">
+        <div class="bg-cardbg/80 border border-cardborder rounded-3xl p-8 md:p-12 relative overflow-hidden backdrop-blur-md">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Polaroid Photo Frame (Left) -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="polaroid-frame bg-white p-4 pb-8 rounded-sm shadow-2xl max-w-xs w-full text-black">
+                        <div class="w-full h-72 bg-gray-200 overflow-hidden mb-3">
+                            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80" alt="Vino Polaroid" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-500">
+                        </div>
+                        <p class="font-serif text-center text-sm font-semibold text-gray-800">Vino Ade C. — 2026</p>
+                    </div>
+                </div>
+
+                <!-- Bio Content (Right) -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-extrabold text-white" data-id="Tentang Saya" data-en="About Me">Tentang Saya</h2>
+                        <p class="text-accentpurple text-sm font-medium mt-1" data-id="Perpaduan logika kode, analisis sistem, dan estetika desain." data-en="Blending code logic, system analysis, and design aesthetics.">
+                            Perpaduan logika kode, analisis sistem, dan estetika desain.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4 text-gray-300 text-sm md:text-base leading-relaxed">
+                        <p data-id="Perjalanan saya di dunia teknologi dimulai saat menempuh pendidikan di SMK 'SORE' Tulungagung. Sebagai pembelajar yang berdedikasi, saya terbiasa memecahkan masalah sistemik dan pemrograman secara mandiri." data-en="My tech journey began during my vocational studies at SMK 'SORE' Tulungagung. As a dedicated learner, I am accustomed to solving systemic and programming problems independently.">
+                            Perjalanan saya di dunia teknologi dimulai saat menempuh pendidikan di SMKN 3 Boyolangu. Sebagai pembelajar yang berdedikasi, saya terbiasa memecahkan masalah sistemik dan pemrograman secara mandiri.
+                        </p>
+                        <p data-id="Saat ini, saya sedang menempuh pendidikan di program studi Sistem Informasi. Kombinasi kemampuan analisis bisnis, pemrograman Python, serta riset pasar digital menjadi fokus utama saya dalam setiap proyek." data-en="Currently, I am pursuing my degree in Information Systems. The combination of business analysis, Python programming, and digital market research is my core focus in every project.">
+                            Saat ini, saya sedang menempuh pendidikan di program studi Sistem Informasi. Kombinasi kemampuan analisis bisnis, pemrograman Python, serta riset pasar digital menjadi fokus utama saya dalam setiap proyek.
+                        </p>
+                    </div>
+
+                    <!-- Key Stats Counter -->
+                    <div class="grid grid-cols-3 gap-4 pt-4 border-t border-cardborder">
+                        <div>
+                            <div class="text-2xl md:text-3xl font-extrabold text-white">2+</div>
+                            <div class="text-xs text-gray-400 mt-1 uppercase tracking-wider" data-id="Tahun Pengalaman" data-en="Years Experience">Tahun Pengalaman</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl md:text-3xl font-extrabold text-white">10+</div>
+                            <div class="text-xs text-gray-400 mt-1 uppercase tracking-wider" data-id="Proyek Selesai" data-en="Projects Done">Proyek Selesai</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl md:text-3xl font-extrabold text-white">5+</div>
+                            <div class="text-xs text-gray-400 mt-1 uppercase tracking-wider" data-id="Riset & Mitra" data-en="Research & Partners">Riset & Mitra</div>
+                        </div>
+                    </div>
+
+                    <!-- Download CV Button -->
+                    <div class="pt-2">
+                        <button class="px-6 py-3 rounded-xl bg-cardbg border border-cardborder text-white text-sm font-semibold hover:border-purple-500 hover:bg-purple-500/10 transition flex items-center gap-2">
+                            <i class="fa-solid fa-download text-accentpurple"></i>
+                            <span data-id="Unduh CV" data-en="Download CV">Unduh CV</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 4. CREATIVE & TECH STACK SECTION -->
+    <section class="py-16 px-6 md:px-12 max-w-7xl mx-auto relative z-10">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-extrabold text-white">Creative & Tech Stack</h2>
+            <p class="text-gray-400 text-sm mt-2" data-id="Alat dan teknologi yang saya gunakan untuk membangun solusi digital." data-en="Tools and technologies I use to build digital solutions.">
+                Alat dan teknologi yang saya gunakan untuk membangun solusi digital.
+            </p>
+        </div>
+
+        <!-- Tech Cards Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            
+            <div class="bg-cardbg border border-cardborder p-4 rounded-2xl hover-card-glow text-center space-y-2">
+                <i class="fa-brands fa-python text-3xl text-yellow-400"></i>
+                <div class="text-sm font-bold text-white">Python</div>
+                <div class="text-[10px] text-gray-400">Logic & OOP</div>
+            </div>
+
+            <div class="bg-cardbg border border-cardborder p-4 rounded-2xl hover-card-glow text-center space-y-2">
+                <i class="fa-brands fa-html5 text-3xl text-orange-500"></i>
+                <div class="text-sm font-bold text-white">HTML & CSS</div>
+                <div class="text-[10px] text-gray-400">Web Basics</div>
+            </div>
+
+            <div class="bg-cardbg border border-cardborder p-4 rounded-2xl hover-card-glow text-center space-y-2">
+                <i class="fa-solid fa-wind text-3xl text-cyan-400"></i>
+                <div class="text-sm font-bold text-white">Tailwind CSS</div>
+                <div class="text-[10px] text-gray-400">Styling</div>
+            </div>
+
+            <div class="bg-cardbg border border-cardborder p-4 rounded-2xl hover-card-glow text-center space-y-2">
+                <i class="fa-brands fa-figma text-3xl text-pink-400"></i>
+                <div class="text-sm font-bold text-white">Figma</div>
+                <div class="text-[10px] text-gray-400">UI/UX Design</div>
+            </div>
+
+            <div class="bg-cardbg border border-cardborder p-4 rounded-2xl hover-card-glow text-center space-y-2">
+                <i class="fa-solid fa-palette text-3xl text-blue-400"></i>
+                <div class="text-sm font-bold text-white">Canva</div>
+                <div class="text-[10px] text-gray-400">Digital Assets</div>
+            </div>
+
+            <div class="bg-cardbg border border-cardborder p-4 rounded-2xl hover-card-glow text-center space-y-2">
+                <i class="fa-solid fa-magnifying-glass-chart text-3xl text-emerald-400"></i>
+                <div class="text-sm font-bold text-white">SEO & SEM</div>
+                <div class="text-[10px] text-gray-400">Marketing Strategy</div>
+            </div>
+
+            <div class="bg-cardbg border border-cardborder p-4 rounded-2xl hover-card-glow text-center space-y-2">
+                <i class="fa-solid fa-cash-register text-3xl text-purple-400"></i>
+                <div class="text-sm font-bold text-white">POS Systems</div>
+                <div class="text-[10px] text-gray-400">System Architecture</div>
+            </div>
+
+            <div class="bg-cardbg border border-cardborder p-4 rounded-2xl hover-card-glow text-center space-y-2">
+                <i class="fa-solid fa-leaf text-3xl text-green-400"></i>
+                <div class="text-sm font-bold text-white">Green IT</div>
+                <div class="text-[10px] text-gray-400">Sustainable Tech</div>
+            </div>
+
+            <div class="bg-cardbg border border-cardborder p-4 rounded-2xl hover-card-glow text-center space-y-2">
+                <i class="fa-brands fa-git-alt text-3xl text-red-500"></i>
+                <div class="text-sm font-bold text-white">Git / GitHub</div>
+                <div class="text-[10px] text-gray-400">Version Control</div>
+            </div>
+
+            <div class="bg-cardbg border border-cardborder p-4 rounded-2xl hover-card-glow text-center space-y-2">
+                <i class="fa-solid fa-database text-3xl text-indigo-400"></i>
+                <div class="text-sm font-bold text-white">MySQL</div>
+                <div class="text-[10px] text-gray-400">Database</div>
+            </div>
+
+            <div class="bg-cardbg border border-cardborder p-4 rounded-2xl hover-card-glow text-center space-y-2">
+                <i class="fa-solid fa-chart-line text-3xl text-rose-400"></i>
+                <div class="text-sm font-bold text-white">Data Analysis</div>
+                <div class="text-[10px] text-gray-400">Business Metrics</div>
+            </div>
+
+            <div class="bg-cardbg border border-cardborder p-4 rounded-2xl hover-card-glow text-center space-y-2">
+                <i class="fa-solid fa-code text-3xl text-sky-400"></i>
+                <div class="text-sm font-bold text-white">VS Code</div>
+                <div class="text-[10px] text-gray-400">Development Environment</div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 4.5. CERTIFICATIONS SECTION -->
+    <section id="sertifikat" class="py-16 px-6 md:px-12 max-w-7xl mx-auto relative z-10">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-white" data-id="Lisensi & Sertifikasi" data-en="Licenses & Certifications">Lisensi & Sertifikasi</h2>
+            <p class="text-gray-400 text-sm mt-2" data-id="Pencapaian dan validasi keahlian profesional saya." data-en="Achievements and validation of my professional expertise.">
+                Pencapaian dan validasi keahlian profesional saya.
+            </p>
+        </div>
+
+        <!-- Certificate Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-center">
+            
+            <!-- Sertifikat 1 -->
+            <div class="bg-cardbg border border-cardborder rounded-2xl p-5 hover-card-glow group">
+                <div class="h-48 bg-zinc-900 rounded-xl mb-4 overflow-hidden relative">
+                    <!-- Ganti link src di bawah dengan link gambar sertifikat Anda -->
+                    <img src="img/redhat.jpg" alt="Sertifikat RedHat" class="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
+                    <i class="fa-solid fa-award absolute bottom-3 right-3 text-2xl text-accentpurple opacity-50 group-hover:opacity-100 transition"></i>
+                </div>
+                <h3 class="text-white font-bold text-lg mb-1" data-id="Sertifikasi Dasar RedHat" data-en="RedHat Basic Certification">Sertifikasi Dasar RedHat</h3>
+                <div class="flex justify-between items-center text-xs mt-3">
+                    <span class="text-accentpurple font-bold">HackerRank</span>
+                    <span class="text-gray-500 font-medium border border-gray-700 px-2 py-1 rounded-md">2026</span>
+                </div>
+            </div>
+
+            <!-- Sertifikat 2 -->
+            <div class="bg-cardbg border border-cardborder rounded-2xl p-5 hover-card-glow group">
+                <div class="h-48 bg-zinc-900 rounded-xl mb-4 overflow-hidden relative">
+                    <!-- Ganti link src di bawah dengan link gambar sertifikat Anda -->
+                    <img src="img/dicoding.jpg" alt="Sertifikat Dicoding" class="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
+                    <i class="fa-solid fa-certificate absolute bottom-3 right-3 text-2xl text-accentcyan opacity-50 group-hover:opacity-100 transition"></i>
+                </div>
+                <h3 class="text-white font-bold text-lg mb-1" data-id="Sertifikasi Dasar Dicoding" data-en="Dicoding Basic Certification">Sertifikasi Dasar Dicoding</h3>
+                <div class="flex justify-between items-center text-xs mt-3">
+                    <span class="text-accentcyan font-bold">Google Digital Garage</span>
+                    <span class="text-gray-500 font-medium border border-gray-700 px-2 py-1 rounded-md">2026</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 5. SELECTED PROJECTS SECTION -->
+    <section id="project" class="py-24 px-6 md:px-12 max-w-7xl mx-auto relative z-10">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-white" data-id="Proyek Terpilih" data-en="Selected Projects">Project</h2>
+            <p class="text-gray-400 text-sm mt-2" data-id="Beberapa karya dan riset yang menyoroti keahlian saya." data-en="Some works and research highlighting my expertise.">
+                Beberapa karya dan riset yang menyoroti keahlian saya.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- Project Card 1 -->
+            <div class="bg-cardbg border border-cardborder rounded-3xl overflow-hidden hover-card-glow flex flex-col justify-between">
+                <div>
+                    <div class="h-56 bg-zinc-900 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1556742049-0a6723d473ed?auto=format&fit=crop&w=800&q=80" alt="POS System" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-500">
+                        <div class="absolute top-4 left-4 flex gap-2">
+                            <span class="px-2.5 py-1 bg-black/70 backdrop-blur-md rounded-full text-[10px] font-bold text-accentpurple border border-white/10">Architecture</span>
+                            <span class="px-2.5 py-1 bg-black/70 backdrop-blur-md rounded-full text-[10px] font-bold text-accentcyan border border-white/10">POS Systems</span>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <h3 class="text-xl font-bold text-white">Arsitektur Sistem POS & Dynamic Pricing</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed" data-id="Riset kelayakan sistem Point of Sale (POS) dan strategi dynamic pricing untuk operasional bisnis travel berbasis digital." data-en="Feasibility research for Travel Point of Sale (POS) systems and dynamic pricing strategies for digital travel operations.">
+                            Riset kelayakan sistem Point of Sale (POS) dan strategi dynamic pricing untuk operasional bisnis travel berbasis digital.
+                        </p>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <a href="#" class="inline-flex items-center gap-2 text-xs font-bold text-white hover:text-accentpurple transition">
+                        <span data-id="Lihat Detail" data-en="View Detail">Lihat Detail</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project Card 2 -->
+            <div class="bg-cardbg border border-cardborder rounded-3xl overflow-hidden hover-card-glow flex flex-col justify-between">
+                <div>
+                    <div class="h-56 bg-zinc-900 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Gojek Analysis" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-500">
+                        <div class="absolute top-4 left-4 flex gap-2">
+                            <span class="px-2.5 py-1 bg-black/70 backdrop-blur-md rounded-full text-[10px] font-bold text-accentpurple border border-white/10">Business Model</span>
+                            <span class="px-2.5 py-1 bg-black/70 backdrop-blur-md rounded-full text-[10px] font-bold text-pink-400 border border-white/10">Analytics</span>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <h3 class="text-xl font-bold text-white">Analisis Model Bisnis & Revenue Gojek</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed" data-id="Analisis komprehensif struktur pendapatan B2B/B2C, alur proposisi nilai, dan strategi platform digital Gojek." data-en="Comprehensive analysis of B2B/B2C revenue structure, value proposition flow, and Gojek's digital platform strategy.">
+                            Analisis komprehensif struktur pendapatan B2B/B2C, alur proposisi nilai, dan strategi platform digital Gojek.
+                        </p>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <a href="#" class="inline-flex items-center gap-2 text-xs font-bold text-white hover:text-accentpurple transition">
+                        <span data-id="Lihat Detail" data-en="View Detail">Lihat Detail</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project Card 3 -->
+            <div class="bg-cardbg border border-cardborder rounded-3xl overflow-hidden hover-card-glow flex flex-col justify-between">
+                <div>
+                    <div class="h-56 bg-zinc-900 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?auto=format&fit=crop&w=800&q=80" alt="Mamuya Hot Springs SEO" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-500">
+                        <div class="absolute top-4 left-4 flex gap-2">
+                            <span class="px-2.5 py-1 bg-black/70 backdrop-blur-md rounded-full text-[10px] font-bold text-emerald-400 border border-white/10">SEO Strategy</span>
+                            <span class="px-2.5 py-1 bg-black/70 backdrop-blur-md rounded-full text-[10px] font-bold text-accentcyan border border-white/10">SEM</span>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <h3 class="text-xl font-bold text-white">Strategi War Room SEO & SEM Mamuya</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed" data-id="Formulasi keyword targeting, pencarian lalu lintas organik, dan kampanye digital untuk destinasi wisata Mamuya Hot Springs." data-en="Keyword targeting formulation, organic traffic search, and digital campaign for Mamuya Hot Springs destination.">
+                            Formulasi keyword targeting, pencarian lalu lintas organik, dan kampanye digital untuk destinasi wisata Mamuya Hot Springs.
+                        </p>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <a href="#" class="inline-flex items-center gap-2 text-xs font-bold text-white hover:text-accentpurple transition">
+                        <span data-id="Lihat Detail" data-en="View Detail">Lihat Detail</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project Card 4 -->
+            <div class="bg-cardbg border border-cardborder rounded-3xl overflow-hidden hover-card-glow flex flex-col justify-between">
+                <div>
+                    <div class="h-56 bg-zinc-900 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Coro Beach Tourism" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-500">
+                        <div class="absolute top-4 left-4 flex gap-2">
+                            <span class="px-2.5 py-1 bg-black/70 backdrop-blur-md rounded-full text-[10px] font-bold text-yellow-400 border border-white/10">Digital Tourism</span>
+                            <span class="px-2.5 py-1 bg-black/70 backdrop-blur-md rounded-full text-[10px] font-bold text-accentpurple border border-white/10">Voice Over</span>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <h3 class="text-xl font-bold text-white">Promosi Pariwisata Pantai Coro Tulungagung</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed" data-id="Pengembangan naskah narasi voice-over bahasa Inggris dan konten promosi digital destinasi lokal Pantai Coro." data-en="Development of English voice-over narration script and digital promotional content for local Coro Beach tourism.">
+                            Pengembangan naskah narasi voice-over bahasa Inggris dan konten promosi digital destinasi lokal Pantai Coro.
+                        </p>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <a href="#" class="inline-flex items-center gap-2 text-xs font-bold text-white hover:text-accentpurple transition">
+                        <span data-id="Lihat Detail" data-en="View Detail">Lihat Detail</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 6. CONTACT SECTION (CYBER TERMINAL STYLE) -->
+    <section id="kontak" class="py-24 px-6 md:px-12 max-w-7xl mx-auto relative z-10">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-white" data-id="Mari Terhubung" data-en="Let's Connect">Mari Terhubung</h2>
+            <p class="text-gray-400 text-sm mt-2" data-id="Saya selalu terbuka untuk proyek baru atau sekadar obrolan. Kirimkan sinyal Anda." data-en="I am always open to new projects or just a chat. Send your signal.">
+                Saya selalu terbuka untuk proyek baru atau sekadar obrolan. Kirimkan sinyal Anda.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- Left Info Cards -->
+            <div class="lg:col-span-5 space-y-4">
+                
+                <!-- System Status -->
+                <div class="bg-cardbg border border-cardborder p-5 rounded-2xl flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <span class="relative flex h-3 w-3">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                        </span>
+                        <span class="text-xs font-bold tracking-widest text-gray-300 uppercase">SYSTEM STATUS: ONLINE</span>
+                    </div>
+                </div>
+
+                <!-- Email Card -->
+                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl space-y-2 hover-card-glow">
+                    <div class="text-[10px] font-bold text-accentpurple uppercase tracking-wider">EMAIL ME</div>
+                    <div class="text-sm font-semibold text-white">vinoade35@gmail.com</div>
+                </div>
+
+                <!-- WhatsApp Card -->
+                <div class="bg-cardbg border border-cardborder p-6 rounded-2xl space-y-2 hover-card-glow">
+                    <div class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">CHAT WHATSAPP</div>
+                    <div class="text-sm font-semibold text-white">+62 899 8167 346</div>
+                </div>
+
+            </div>
+
+            <!-- Right Terminal Contact Form -->
+            <div class="lg:col-span-7 bg-cardbg border border-cardborder rounded-3xl p-6 md:p-8 hover-card-glow">
+                
+                <div class="flex items-center gap-2 mb-6 pb-4 border-b border-cardborder">
+                    <i class="fa-solid fa-terminal text-accentpink text-sm"></i>
+                    <span class="text-xs font-bold text-gray-300 tracking-widest uppercase">INITIATE DATA TRANSMISSION</span>
+                </div>
+
+                <form class="space-y-4" onsubmit="event.preventDefault(); alert('Pesan berhasil terkirim!');">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-400 mb-1" data-id="ID Pengirim / Nama" data-en="Sender ID / Name">ID Pengirim / Nama</label>
+                        <input type="text" placeholder="Masukkan nama Anda" required class="w-full bg-zinc-900/80 border border-cardborder rounded-xl px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-accentpurple transition">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-gray-400 mb-1" data-id="Frekuensi Email" data-en="Email Frequency / Address">Frekuensi Email</label>
+                        <input type="email" placeholder="nama@domain.com" required class="w-full bg-zinc-900/80 border border-cardborder rounded-xl px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-accentpurple transition">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-gray-400 mb-1" data-id="Data Transmisi Pesan" data-en="Message Data Transmission">Data Transmisi Pesan</label>
+                        <textarea rows="4" placeholder="Tuliskan pesan Anda di sini..." required class="w-full bg-zinc-900/80 border border-cardborder rounded-xl px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-accentpurple transition"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-sm hover:opacity-90 transition flex items-center justify-center gap-2 shadow-lg shadow-purple-600/20">
+                        <span data-id="INISIASI TRANSMISI" data-en="INITIATE TRANSMISSION">INISIASI TRANSMISI</span>
+                        <i class="fa-solid fa-paper-plane text-xs"></i>
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 7. FOOTER -->
+    <footer class="border-t border-cardborder py-8 text-center text-xs text-gray-500 relative z-10">
+        <p>&copy; 2026 Vino Ade Chrisnanta. All rights reserved.</p>
+    </footer>
+
+    <!-- Floating Back To Top Button -->
+    <a href="#" class="fixed bottom-6 right-6 w-12 h-12 bg-emerald-500 text-black rounded-full flex items-center justify-center shadow-lg shadow-emerald-500/30 hover:scale-110 transition z-50">
+        <i class="fa-solid fa-arrow-up text-sm"></i>
+    </a>
+
+    <!-- Interactive Language Toggle Script -->
+    <script>
+        const langToggleBtn = document.getElementById('langToggle');
+        const currentLangSpan = document.getElementById('currentLang');
+        let currentLang = 'ID';
+
+        langToggleBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'ID' ? 'EN' : 'ID';
+            currentLangSpan.textContent = currentLang;
+
+            document.querySelectorAll('[data-id]').forEach(el => {
+                if (currentLang === 'EN') {
+                    if (el.getAttribute('data-en')) {
+                        el.textContent = el.getAttribute('data-en');
+                    }
+                } else {
+                    if (el.getAttribute('data-id')) {
+                        el.textContent = el.getAttribute('data-id');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
