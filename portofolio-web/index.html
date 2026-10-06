@@ -140,82 +140,72 @@
         </div>
     </nav>
 
-    <!-- 2. HERO SECTION -->
-    <section id="beranda" class="min-h-screen pt-32 pb-20 px-6 md:px-12 max-w-7xl mx-auto flex items-center relative z-10">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
+    <!-- 1. HERO SECTION -->
+    <section id="beranda" class="min-h-screen pt-28 pb-16 px-6 md:px-12 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10 relative z-10">
+        
+        <!-- Sisi Kiri: Teks & Informasi -->
+        <div class="w-full md:w-1/2 flex flex-col justify-center">
+            <div class="inline-block px-3 py-1 bg-purple-900/30 border border-purple-500/30 rounded-full text-xs text-purple-300 font-mono tracking-wider w-fit mb-4">
+                HALO, SAYA
+            </div>
             
-            <!-- Hero Left Text Content -->
-            <div class="lg:col-span-7 space-y-6">
-                <div class="inline-block px-3 py-1 rounded-md bg-purple-500/10 border border-purple-500/20 text-accentpurple text-xs font-bold tracking-widest uppercase">
-                    HALO, SAYA
-                </div>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-tight mb-3">
+                Vino Ade <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
+                    Chrisnanta
+                </span>
+            </h1>
 
-                <h1 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight leading-tight">
-                    Vino Ade <br>
-                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-200 to-purple-400">
-                        Chrisnanta
-                    </span>
-                </h1>
+            <p class="text-gray-300 font-medium text-lg mb-4">
+                Seorang <span class="border-b-2 border-purple-500 pb-0.5 text-white">Mahasiswa Sistem Informasi</span>
+            </p>
 
-                <div class="text-xl md:text-2xl text-gray-300 font-medium flex items-center gap-2">
-                    <span data-id="Seorang" data-en="A">Seorang</span>
-                    <span class="text-white font-semibold border-b-2 border-accentpurple">
-                        Mahasiswa Sistem Informasi
-                    </span>
-                </div>
-
-                <!-- Social Icons Bar -->
-                <div class="flex items-center gap-4 py-2 text-gray-400">
-                    <a href="https://github.com/VinoAde57" target="_blank" class="w-10 h-10 rounded-lg bg-cardbg border border-cardborder flex items-center justify-center hover:text-white hover:border-purple-500 hover:bg-purple-500/10 transition"><i class="fa-brands fa-github text-lg"></i></a>
-                    <a href="https://www.instagram.com/vinoo_ac" target="_blank" class="w-10 h-10 rounded-lg bg-cardbg border border-cardborder flex items-center justify-center hover:text-white hover:border-purple-500 hover:bg-purple-500/10 transition"><i class="fa-brands fa-instagram text-lg"></i></a>
-                </div>
-
-                <p class="text-gray-400 text-base max-w-xl leading-relaxed" data-id="Saya membantu bisnis dan organisasi mengembangkan strategi sistem informasi, pemrograman logika Python, dan optimasi bisnis digital yang berdaya saing tinggi." data-en="I help businesses and organizations develop information system strategies, Python logical programming, and highly competitive digital business optimizations.">
-                    Saya membantu bisnis dan organisasi mengembangkan strategi sistem informasi, pemrograman logika Python, dan optimasi bisnis digital yang berdaya saing tinggi.
-                </p>
-
-                <!-- Action CTA Buttons -->
-                <div class="flex flex-wrap items-center gap-4 pt-4">
-                    <a href="#proyek" class="px-6 py-3.5 rounded-full bg-white text-black font-bold text-sm hover:bg-gray-200 transition flex items-center gap-2 group">
-                        <span data-id="Lihat Proyek" data-en="View Projects">Lihat Proyek</span>
-                        <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
-                    </a>
-                    <a href="#kontak" class="px-6 py-3.5 rounded-full bg-cardbg border border-cardborder text-white font-medium text-sm hover:border-purple-500 hover:bg-purple-500/10 transition" data-id="Kontak Saya" data-en="Contact Me">
-                        Kontak Saya
-                    </a>
-                </div>
+            <!-- Social Links -->
+            <div class="flex gap-4 my-2 text-gray-400">
+                <a href="https://github.com/VinoAde57" target="_blank" class="hover:text-white transition"><i class="fa-brands fa-github text-xl"></i></a>
+                <a href="https://www.instagram.com/vinoo_ac?stkn=ZW9laTdqZWRrNWI4" class="hover:text-white transition"><i class="fa-brands fa-instagram text-xl"></i></a>
             </div>
 
-            <!-- Hero Right Card Profile Showcase -->
-            <div class="lg:col-span-5 flex justify-center">
-                <div class="relative w-full max-w-sm bg-cardbg border border-cardborder rounded-3xl p-4 hover-card-glow shadow-2xl">
-                    <!-- Image Box -->
-                    <div class="relative w-full h-80 rounded-2xl overflow-hidden bg-zinc-900">
-                        <img src="img/foto1.jpeg" alt="Vino Ade Chrisnanta" class="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition duration-500">
-                        
-                        <!-- Top Tag Overlay -->
-                        <div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 text-xs font-semibold text-white">
-                            Vino Ade Chrisnanta <span class="text-accentpurple">• Tech Analyst</span>
-                        </div>
-                    </div>
+            <!-- Bio Singkat -->
+            <p class="text-gray-400 text-sm leading-relaxed my-4 max-w-lg" data-id="Saya membantu bisnis dan organisasi mengembangkan strategi sistem informasi, pemrograman logika Python, dan optimasi bisnis digital yang berdaya saing tinggi." data-en="I help businesses and organizations develop information system strategies, Python logic programming, and highly competitive digital business optimization.">
+                Saya membantu bisnis dan organisasi mengembangkan strategi sistem informasi, pemrograman logika Python, dan optimasi bisnis digital yang berdaya saing tinggi.
+            </p>
 
-                    <!-- Profile Card Footer Badge -->
-                    <div class="mt-4 p-3 bg-zinc-900/80 rounded-xl border border-white/5 flex items-center justify-between">
-                        <div class="flex items-center gap-2.5">
-                            <div class="relative w-3 h-3">
-                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-                            </div>
-                            <span class="text-xs font-medium text-gray-300">@vinoadechrisnanta</span>
-                        </div>
-                        <a href="#kontak" class="text-xs font-bold text-accentpurple hover:underline" data-id="Hubungi" data-en="Contact">Hubungi</a>
-                    </div>
-                </div>
+            <!-- Tombol Aksi -->
+            <div class="flex flex-wrap gap-4 mt-4">
+                <a href="#proyek" class="bg-white text-black font-semibold text-xs px-5 py-3 rounded-full hover:bg-gray-200 transition flex items-center gap-2">
+                    <span data-id="Lihat Proyek" data-en="View Projects">Lihat Proyek</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="#kontak" class="bg-zinc-900 text-gray-300 border border-zinc-700 font-semibold text-xs px-5 py-3 rounded-full hover:bg-zinc-800 hover:text-white transition">
+                    <span data-id="Kontak Saya" data-en="Contact Me">Kontak Saya</span>
+                </a>
             </div>
-
         </div>
-    </section>
 
+        <!-- Sisi Kanan: Foto Polaroid -->
+        <div class="w-full md:w-1/2 flex justify-center md:justify-end">
+            <div class="relative bg-zinc-900 border border-zinc-800 p-4 rounded-2xl shadow-2xl max-w-sm w-full group">
+                <!-- Header Kartu -->
+                <div class="flex justify-between items-center mb-3 text-xs text-gray-400">
+                    <span class="font-mono">Vino Ade Chrisnanta</span>
+                    <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Available</span>
+                </div>
+                
+                <!-- Foto -->
+                <div class="overflow-hidden rounded-xl aspect-square mb-3">
+                    <img src="img/foto1.jpeg" alt="Vino Ade Chrisnanta" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500">
+                </div>
+
+                <!-- Footer Kartu -->
+                <div class="flex justify-between items-center pt-2 border-t border-zinc-800/80 text-xs text-gray-400">
+                    <span class="font-mono text-purple-400">@vinoadechrisnanta</span>
+                    <a href="#kontak" class="text-purple-400 hover:underline">Hubungi</a>
+                </div>
+            </div>
+        </div>
+
+    </section>
     <!-- 3. ABOUT SECTION -->
     <section id="tentang" class="py-24 px-6 md:px-12 max-w-7xl mx-auto relative z-10">
         <div class="bg-cardbg/80 border border-cardborder rounded-3xl p-8 md:p-12 relative overflow-hidden backdrop-blur-md">
