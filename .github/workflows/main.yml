@@ -32,7 +32,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # INI BAGIAN PENTING: Arahkan ke nama foldermu
-          path: './portofolio-web'
+          path: './web-porto-bootstrap'
 
       - name: Deploy to GitHub Pages
         id: deployment
