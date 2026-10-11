@@ -1,1 +1,1 @@
-alert("Halo nama saya Vino Ade C");
+alert('Halo nama saya Vino Ade C');
