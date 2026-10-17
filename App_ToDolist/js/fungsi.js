@@ -1,4 +1,4 @@
-var barang = ['buku', 'penggaris'];
+var barang = ['pensil', 'buku', 'penggaris'];
  
 // menampilkan data
 function ShowData() {
